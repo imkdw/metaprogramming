@@ -1,9 +1,8 @@
+import { ValidatorType } from "./validator-types";
+
 export interface ValidatorEntry {
-  type: string;
+  type: ValidatorType;
   options?: Record<string, unknown> | undefined;
 }
 
-export const validationMetadata = new Map<
-  Function,
-  Map<string, ValidatorEntry[]>
->();
+export const validationMetadata = new Map<Function, Map<string, ValidatorEntry[]>>();

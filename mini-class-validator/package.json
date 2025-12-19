@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "tsc-watch --onSuccess \"node dist/app.js\""
+    "start": "tsc-watch --onSuccess \"node dist/app.js\"",
+    "start:temp": "tsc-watch --onSuccess \"node dist/temp.js\""
   },
   "keywords": [],
   "author": "",

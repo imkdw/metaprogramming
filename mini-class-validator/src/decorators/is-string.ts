@@ -1,7 +1,6 @@
 import { createValidatorDecorator } from "./create-validator";
-
-export const IS_STRING = "isString";
+import { VALIDATOR_TYPES } from "../validator-types";
 
 export function IsString() {
-  return createValidatorDecorator(IS_STRING);
+  return createValidatorDecorator(VALIDATOR_TYPES.IS_STRING);
 }

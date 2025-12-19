@@ -1,31 +1,30 @@
-import { IsString } from "./decorators/is-string";
-import { IsNumber } from "./decorators/is-number";
-import { IsArray } from "./decorators/is-array";
+import { IsString, IsNumber, IsArray, Min, Max, MinLength, MaxLength } from "./decorators";
 import { validate } from "./validate";
 
-class CreateSeatDto {
+class CreateUserDto {
+  constructor(name: string, age: number, tags: string[]) {
+    this.name = name;
+    this.age = age;
+    this.tags = tags;
+  }
+
   @IsString()
-  seatName: string;
+  @MinLength(2)
+  @MaxLength(20)
+  private name: string;
 
   @IsNumber()
-  seatNumber: number;
+  @Min(1)
+  @Max(150)
+  private age: number;
 
   @IsArray({ each: "string" })
-  tags: string[];
-
-  @IsArray({ each: "number" })
-  scores: number[];
-
-  @IsArray()
-  items: unknown[];
+  private tags: string[];
 }
 
-const dto1 = new CreateSeatDto();
-dto1.seatName = "A1";
-dto1.seatNumber = 1;
-dto1.tags = ["tag1", "tag2"];
-dto1.scores = [1, 2, 3];
-dto1.items = [1, 2, 3];
+const validUser = new CreateUserDto("아", 25, [1 as any, "typescript"]);
 
-validate(dto1);
-console.log(dto1);
+// Error: name: minLength (options: {"value":2}) 검증 실패, tags: isArray (options: {"each":"string"}) 검증 실패
+//     at validate (/Users/imkdw/metaprogramming/mini-class-validator/dist/validate.js:59:15)
+//     at Object.<anonymous> (/Users/imkdw/metaprogramming/mini-class-validator/dist/app.js:35:25)
+validate(validUser);

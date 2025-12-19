@@ -1,9 +1,7 @@
 import { validationMetadata } from "../metadata";
+import { ValidatorType } from "../validator-types";
 
-export function createValidatorDecorator(
-  validatorType: string,
-  options?: Record<string, unknown>
-) {
+export function createValidatorDecorator(validatorType: ValidatorType, options?: Record<string, unknown>) {
   return function (target: Object, propertyKey: string) {
     const constructor = target.constructor;
 
@@ -17,9 +15,6 @@ export function createValidatorDecorator(
       properties.set(propertyKey, []);
     }
 
-    properties.get(propertyKey)!.push({
-      type: validatorType,
-      options,
-    });
+    properties.get(propertyKey)!.push({ type: validatorType, options });
   };
 }
